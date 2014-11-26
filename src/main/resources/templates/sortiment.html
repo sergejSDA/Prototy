@@ -1,0 +1,46 @@
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <body>
+    <h1 align="center"><i>Herzlich Willkommen in unserem Katalog</i></h1>
+   	<h3 align="center">Bitte w&auml;hlen Sie verschiedene Artikel aus:</h3>
+       
+            <table align="center">
+
+            <thead>
+            <tr>
+           	
+            <th>Name</th>
+        	<th>Alter</th>
+        	<th>Preis</th>
+        	<th>Alkoholgehalt</th>
+        	<th>Volumen</th>
+        	<th>Cognacart</th>
+        	<th align="left" for="number">Anzahl</th>
+ 
+        	
+            </tr>
+             </thead>
+   					
+       				 <tr th:each=" article : ${articles} ">
+       				 	
+							<td align="center" th:text="${article.name}"></td>
+							<td align="center" th:text="${article.alter}"></td>
+							<td align="center" th:text="${article.price}"></td>
+							<td align="center" th:text="${article.alkoholgehalt}"></td>
+							<td align="center" th:text="${article.volumen}"></td>
+							<td align="center" th:text="${article.cognacart}"></td>
+							
+						
+							<td>
+								<form action="/warenkorb" method="post">
+								<input type="hidden" name="pid" value="0" th:value="${article.identifier}" /> 
+									<input id="number" type="number" name="number" value="1" min="1" max="10" step="1"/>
+									<input type="submit" value="Artikel zum Warenkorb hinzuf&uuml;gen" />
+								</form>
+							</td>	
+						</tr>
+            	<form  method="get" action="warenkorb">
+						 <td><button align="center" name="searchterm">Zum Warenkorb</button></td>
+					</form>
+					</table>
+    </body>
+</html>
